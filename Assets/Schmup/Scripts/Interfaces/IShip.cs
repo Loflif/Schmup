@@ -2,9 +2,9 @@
 
 namespace Schmup
 {
-    public abstract class IShip : MonoBehaviour
+    interface IShip
     {
-        public abstract void UpdateMovementVector(Vector2 pMovementInput);
-
+        void UpdateMovementVector(Vector2 pMovementDirection);
+        void UpdateAimVector(Vector2 pAimDirection);
     }   
 }

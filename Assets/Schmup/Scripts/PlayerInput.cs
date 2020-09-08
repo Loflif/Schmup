@@ -14,25 +14,28 @@ namespace Schmup
         private void Awake()
         {
             Input = new InputMaster();
+            Input.Enable();
             CurrentShip = GetComponent<IShip>();
-
-            Input.Player.Move.performed += context => CurrentShip.UpdateMovementVector(context.ReadValue<Vector2>());
+            BindNewInput();
         }
 
         private void SetShip(IShip pNewShip)
         {
-            Input.Player.Move.performed -= context => CurrentShip.UpdateMovementVector(context.ReadValue<Vector2>());
-            
-            
+            UnbindInput();
             CurrentShip = pNewShip;
+            BindNewInput();
+        }
+        
+        private void UnbindInput()
+        {
+            Input.Player.Move.performed -= context => CurrentShip.UpdateMovementVector(context.ReadValue<Vector2>());
+            Input.Player.Move.canceled -= context => CurrentShip.UpdateMovementVector(Vector2.zero);
         }
 
-        private void Update()
+        private void BindNewInput()
         {
-            
-            
-            Vector2 movementInput = Input.Player.Move.ReadValue<Vector2>();
-            
+            Input.Player.Move.performed += context => CurrentShip.UpdateMovementVector(context.ReadValue<Vector2>());
+            Input.Player.Move.canceled += context => CurrentShip.UpdateMovementVector(Vector2.zero);
         }
     }   
 }

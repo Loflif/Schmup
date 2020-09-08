@@ -3,27 +3,40 @@ using UnityEngine;
 
 namespace Schmup
 {
-    public class SphereShipController : IShip
+    public class SphereShipController : MonoBehaviour, IShip
     {
         [Header("Movement")] 
         [SerializeField] private float MovementForce = 1000.0f;
         
-        private Rigidbody Rigidbody = null;
+        private Rigidbody2D Rigidbody = null;
+
+        private Vector2 LastMovementInput = Vector2.zero;
 
         private void Awake()
         {
-            Rigidbody = GetComponent<Rigidbody>();
+            Rigidbody = GetComponent<Rigidbody2D>();
         }
 
-
-        public override void UpdateMovementVector(Vector2 pMovementInput)
+        public void UpdateMovementVector(Vector2 pMovementDirection)
         {
-            // Rigidbody.AddForce()
+            LastMovementInput = pMovementDirection;
         }
-
-        private void Update()
+        
+        public void UpdateAimVector(Vector2 pAimDirection)
         {
             
         }
+
+        private void FixedUpdate()
+        {
+            Move();
+        }
+
+        private void Move()
+        {
+            Rigidbody.AddForce((MovementForce * Time.fixedDeltaTime) * LastMovementInput);
+        }
+
+        
     }   
 }
