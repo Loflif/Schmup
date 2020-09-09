@@ -36,7 +36,7 @@
             {
                 UNITY_FOG_COORDS(1)
                 float4 clipSpacePos : SV_POSITION;
-                float3 normal : TEXCOORD0; // TEXCOORD are interpolaters in fragment
+                float3 normal : NORMAL; // TEXCOORD are interpolaters in fragment
                 float3 worldPos : TEXCOORD1;
             };
 
@@ -53,7 +53,7 @@
             VertexOutput vert (VertexInput i)
             {
                 VertexOutput o;
-                o.normal = i.normal;
+                o.normal = UnityObjectToWorldNormal(i.normal);
                 o.worldPos = mul(unity_ObjectToWorld, i.vertex);
                 o.clipSpacePos = UnityObjectToClipPos(i.vertex);
                 UNITY_TRANSFER_FOG(o,o.vertex);

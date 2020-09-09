@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using UnityEngine.Rendering;
+﻿using UnityEngine;
 
 namespace Schmup
 {
@@ -8,8 +6,6 @@ namespace Schmup
     {
         private InputMaster Input = null;
         private IShip CurrentShip = null;
-
-        private Vector2 MovementInput = Vector2.zero;
 
         private void Awake()
         {
@@ -29,13 +25,13 @@ namespace Schmup
         private void UnbindInput()
         {
             Input.Player.Move.performed -= context => CurrentShip.UpdateMovementVector(context.ReadValue<Vector2>());
-            Input.Player.Move.canceled -= context => CurrentShip.UpdateMovementVector(Vector2.zero);
+            // Input.Player.Move.canceled -= context => CurrentShip.UpdateMovementVector(Vector2.zero);
         }
 
         private void BindNewInput()
         {
             Input.Player.Move.performed += context => CurrentShip.UpdateMovementVector(context.ReadValue<Vector2>());
-            Input.Player.Move.canceled += context => CurrentShip.UpdateMovementVector(Vector2.zero);
+            // Input.Player.Move.canceled += context => CurrentShip.UpdateMovementVector(Vector2.zero);
         }
     }   
 }

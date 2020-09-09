@@ -9,6 +9,7 @@ namespace Schmup
         [SerializeField] private float MovementForce = 1000.0f;
         
         private Rigidbody2D Rigidbody = null;
+        private IWeapon Currentweapon = null;
 
         private Vector2 LastMovementInput = Vector2.zero;
 
@@ -27,6 +28,11 @@ namespace Schmup
             
         }
 
+        public void SetAttackInput(bool pIsAttackWanted)
+        {
+            
+        }
+
         private void FixedUpdate()
         {
             Move();
@@ -36,7 +42,5 @@ namespace Schmup
         {
             Rigidbody.AddForce((MovementForce * Time.fixedDeltaTime) * LastMovementInput);
         }
-
-        
     }   
 }
