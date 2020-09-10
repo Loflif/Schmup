@@ -36,8 +36,8 @@
             {
                 UNITY_FOG_COORDS(1)
                 float4 clipSpacePos : SV_POSITION;
-                float3 normal : NORMAL; // TEXCOORD are interpolaters in fragment
-                float3 worldPos : TEXCOORD1;
+                float3 normal : NORMAL;
+                float3 worldPos : TEXCOORD0;
             };
 
             float4 _Color;
@@ -99,8 +99,7 @@
                 float3 rampedRim = step(_RimStep, rimFallOff);
                 float3 rimLight = _RimColor * rampedRim * _RimStrength;
 
-                //return rimLight.xyzz;
-                
+                // composite                
                 float3 compositeLight = diffuseLight + _AmbientColor + rimLight;
                 float3 finalSurfaceColor = compositeLight * col.rgb + specularLight;
                 // apply fog

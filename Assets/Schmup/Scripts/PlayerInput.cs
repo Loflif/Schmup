@@ -25,13 +25,17 @@ namespace Schmup
         private void UnbindInput()
         {
             Input.Player.Move.performed -= context => CurrentShip.UpdateMovementVector(context.ReadValue<Vector2>());
-            // Input.Player.Move.canceled -= context => CurrentShip.UpdateMovementVector(Vector2.zero);
+            
+            Input.Player.Attack.performed -= context => CurrentShip.SetAttackInput(true);
+            Input.Player.Attack.canceled -= context => CurrentShip.SetAttackInput(false);
         }
 
         private void BindNewInput()
         {
             Input.Player.Move.performed += context => CurrentShip.UpdateMovementVector(context.ReadValue<Vector2>());
-            // Input.Player.Move.canceled += context => CurrentShip.UpdateMovementVector(Vector2.zero);
+            
+            Input.Player.Attack.performed += context => CurrentShip.SetAttackInput(true);
+            Input.Player.Attack.canceled += context => CurrentShip.SetAttackInput(false);
         }
     }   
 }
