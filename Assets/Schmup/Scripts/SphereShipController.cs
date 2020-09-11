@@ -11,14 +11,19 @@ namespace Schmup
 
         public float ShieldJuice
         {
-            get => ShieldJuice;
+            get
+            {
+                return shieldJuice;
+            }
             set
             {
                 value = Mathf.Clamp01(value);
                 GameManager.Instance.SetShieldJuice(value);
-                ShieldJuice = value;
+                shieldJuice = value;
             }
         }
+
+        private float shieldJuice;
 
         [Header("Shield")] 
         [Tooltip("Fraction of shield drain per second")]
@@ -78,7 +83,7 @@ namespace Schmup
         private void FixedUpdate()
         {
             Move();
-            // UpdateShieldValues();
+            UpdateShieldValues();
         }
 
         private void Move()
