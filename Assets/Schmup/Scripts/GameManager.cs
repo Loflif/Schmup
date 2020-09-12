@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace Schmup
 {
     [DefaultExecutionOrder(-100)]
     public class GameManager : MonoBehaviour
     {
-        private RectTransform ShieldFill = null;
+        private RectTransform ShieldFillRect = null;
+        private Image ShieldFillImage = null;
 
         public static GameManager Instance
         {
@@ -24,14 +26,22 @@ namespace Schmup
             {
                 Instance = this;
             }
-            ShieldFill = GameObject.Find("ShieldFill").GetComponent<RectTransform>();
+            
+            GameObject shieldFill = GameObject.Find("ShieldFill");
+            ShieldFillRect = shieldFill.GetComponent<RectTransform>();
+            ShieldFillImage = shieldFill.GetComponent<Image>();
         }
 
         public void SetShieldJuice(float pValue)
         {
-            Vector3 shieldFillScale = ShieldFill.localScale;
+            Vector3 shieldFillScale = ShieldFillRect.localScale;
             shieldFillScale.x = pValue;
-            ShieldFill.localScale = shieldFillScale;
+            ShieldFillRect.localScale = shieldFillScale;
+        }
+
+        public void SetShieldMeterColor(Color pColor)
+        {
+            ShieldFillImage.color = pColor;
         }
         
     }   
