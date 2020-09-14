@@ -15,6 +15,7 @@ namespace Schmup
         private Rigidbody2D FlailHead = null;
 
         private Transform AttachmentPoint = null;
+        private Rigidbody2D ParentBody = null;
         private Transform OwnTransform;
 
         private SpriteRenderer SpinBlur = null;
@@ -34,6 +35,7 @@ namespace Schmup
         public void Attach(Transform pParent)
         {
             transform.parent = pParent;
+            ParentBody = GetComponentInParent<Rigidbody2D>();
             AttachmentPoint = pParent;
             SpinBlur.transform.position = pParent.position;
         }
@@ -61,7 +63,7 @@ namespace Schmup
 
         float GetVelocityPercent()
         {
-            return FlailHead.velocity.magnitude / MaxSpinVelocity;
+            return (FlailHead.velocity.magnitude - ParentBody.velocity.magnitude) / MaxSpinVelocity;
         }
 
         private void ChangeSpinBlurAlphaBasedOnFlailVelocity()
