@@ -8,20 +8,22 @@ namespace Schmup
         [SerializeField] private float MaxSpinVelocity = 10.0f;
 
         [Header("Blur")] 
-        [SerializeField] private float BlurAlphaMaxMultiplier = 0.7f;
         [SerializeField] private float BlurSpinMaxVelocity = -180.0f;
+        [SerializeField] private float AlphaFadeSpeed = 1.0f;
         
         private bool LastAttackInput = false;
         private Rigidbody2D FlailHead = null;
 
         private Transform AttachmentPoint = null;
-        private Rigidbody2D ParentBody = null;
         private Transform OwnTransform;
 
         private SpriteRenderer SpinBlur = null;
 
+        private MeshRenderer[] Meshes;
+
         private void Awake()
         {
+            Meshes = GetComponentsInChildren<MeshRenderer>();
             SpinBlur = GetComponentInChildren<SpriteRenderer>();
             OwnTransform = transform;
             FlailHead = GetComponentInChildren<Rigidbody2D>();
@@ -35,7 +37,6 @@ namespace Schmup
         public void Attach(Transform pParent)
         {
             transform.parent = pParent;
-            ParentBody = GetComponentInParent<Rigidbody2D>();
             AttachmentPoint = pParent;
             SpinBlur.transform.position = pParent.position;
         }
@@ -45,8 +46,14 @@ namespace Schmup
             if (LastAttackInput)
             {
                 Spin();
+                FadeBlur(true);
+                FadeMeshes(false);
             }
-            ChangeSpinBlurAlphaBasedOnFlailVelocity();
+            else
+            {
+                FadeBlur(false);
+                FadeMeshes(true);
+            }
             SpinFlailBlur();
         }
 
@@ -61,17 +68,40 @@ namespace Schmup
             FlailHead.AddForce(perpendicularToPlayer * (SpinForce * Time.fixedDeltaTime));
         }
 
-        float GetVelocityPercent()
+        private void FadeBlur(bool pFadeIn)
         {
-            return (FlailHead.velocity.magnitude - ParentBody.velocity.magnitude) / MaxSpinVelocity;
-        }
-
-        private void ChangeSpinBlurAlphaBasedOnFlailVelocity()
-        {
+            if (pFadeIn && SpinBlur.color.a >= 1 
+            || !pFadeIn && SpinBlur.color.a <= 0)
+                return;
+            
             Color newColor = SpinBlur.color;
             
-            newColor.a = Mathf.SmoothStep(newColor.a, GetVelocityPercent() - BlurAlphaMaxMultiplier, 0.5f);
+            float targetAlpha = pFadeIn ? 1 : 0;
+        
+            newColor.a = Mathf.SmoothStep(newColor.a, targetAlpha, AlphaFadeSpeed * Time.fixedDeltaTime);
             SpinBlur.color = newColor;
+        }
+
+        private void FadeMeshes(bool pFadeIn)
+        {
+            if (pFadeIn && Meshes[0].material.color.a >= 1
+                || !pFadeIn && Meshes[0].material.color.a <= 0)
+                return;
+
+            Color newColor = Meshes[0].material.color;
+
+            float targetAlpha = pFadeIn ? 1 : 0;
+            
+            newColor.a = Mathf.SmoothStep(newColor.a, targetAlpha, AlphaFadeSpeed * Time.fixedDeltaTime);
+            foreach (MeshRenderer m in Meshes)
+            {
+                m.material.color = newColor;
+            }
+        }
+
+        float GetVelocityPercent()
+        {
+            return FlailHead.velocity.magnitude / MaxSpinVelocity;
         }
 
         private void SpinFlailBlur()

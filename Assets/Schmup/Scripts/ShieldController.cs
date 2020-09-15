@@ -11,7 +11,7 @@ namespace Schmup
         [Tooltip("Amount of shield juice required to toggle the shield on 1st ColorKey is set at MinimumToggleThreshold")]
         [SerializeField] private float MinimumToggleThreshold = 0.2f;
         [Tooltip("Color of Meter based on level")]
-        [SerializeField] private Gradient MeterLevelColor;
+        [SerializeField] private Gradient MeterLevelColor = null;
         
         private float juice;
 
