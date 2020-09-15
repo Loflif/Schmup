@@ -1,4 +1,4 @@
-﻿Shader "Unlit/Toon"
+﻿Shader "Unlit/ToonTransperant"
 {
     Properties
     {
@@ -15,7 +15,10 @@
     SubShader
     {
         Tags { "Queue"="Transparent" "RenderType" = "Transparent" }
-
+        ZWrite Off
+        Blend SrcAlpha OneMinusSrcAlpha
+        
+        
         Pass
         {
             CGPROGRAM
