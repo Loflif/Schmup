@@ -1,33 +1,5 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!114 &-4028633535045033100
-MonoBehaviour:
-  m_ObjectHideFlags: 3
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 556797029e73b2347956b6579e77e05b, type: 3}
-  m_Name: DepthOfField
-  m_EditorClassIdentifier: 
-  active: 1
-  enabled:
-    overrideState: 1
-    value: 1
-  focusDistance:
-    overrideState: 1
-    value: 10
-  aperture:
-    overrideState: 1
-    value: 5.6
-  focalLength:
-    overrideState: 0
-    value: 50
-  kernelSize:
-    overrideState: 1
-    value: 0
 --- !u!114 &-3455688263182118050
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1349,12 +1321,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8e6292b2c06870d4495f009f912b9600, type: 3}
-  m_Name: BlurryToonMess
+  m_Name: BlurryBloomyMess
   m_EditorClassIdentifier: 
   settings:
   - {fileID: -3455688263182118050}
   - {fileID: 1842515682217786146}
-  - {fileID: -4028633535045033100}
 --- !u!114 &1842515682217786146
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -1373,7 +1344,7 @@ MonoBehaviour:
     value: 1
   intensity:
     overrideState: 1
-    value: 8
+    value: 9.98
   threshold:
     overrideState: 1
     value: 0.7
@@ -1384,8 +1355,8 @@ MonoBehaviour:
     overrideState: 0
     value: 65472
   diffusion:
-    overrideState: 0
-    value: 7
+    overrideState: 1
+    value: 6.9
   anamorphicRatio:
     overrideState: 0
     value: 0

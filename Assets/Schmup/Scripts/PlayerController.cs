@@ -1,10 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 namespace Schmup
 {
-    public class SphereShipController : MonoBehaviour, IShip
+    public class PlayerController : MonoBehaviour, IShip
     {
         [Header("Movement")] 
         [SerializeField] private float MovementForce = 1000.0f;
@@ -18,6 +17,8 @@ namespace Schmup
         private ShieldController Shield = null;        
         private Transform OwnTransform = null;
 
+        private Bounds CameraBounds;
+
         private void Awake()
         {
             OwnTransform = transform;
@@ -26,6 +27,8 @@ namespace Schmup
             IWeapon startWeapon = GetComponentInChildren<IWeapon>();
             Weapons.Add(startWeapon);
             CurrentWeaponIterator = Weapons.IndexOf(startWeapon);
+
+            // CameraBounds.min = 
         }
 
         private void Start()
@@ -63,6 +66,7 @@ namespace Schmup
         private void Move()
         {
             Rigidbody.AddForce((MovementForce * Time.fixedDeltaTime) * LastMovementInput);
+            
         }
     }   
 }

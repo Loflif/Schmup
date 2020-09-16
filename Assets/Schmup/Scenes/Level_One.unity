@@ -300,17 +300,9 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2145472593988953419, guid: 86c660809b2822b48af7de70ccafda7a, type: 3}
-      propertyPath: ExplodingParticle
-      value: 
-      objectReference: {fileID: 2266719238102416697, guid: 26410fcaec089664e8f47c54c6b86101, type: 3}
     - target: {fileID: 5017769859177164441, guid: 86c660809b2822b48af7de70ccafda7a, type: 3}
       propertyPath: m_Name
       value: EnemyShip (1)
-      objectReference: {fileID: 0}
-    - target: {fileID: 5017769859177164441, guid: 86c660809b2822b48af7de70ccafda7a, type: 3}
-      propertyPath: m_TagString
-      value: Enemy
       objectReference: {fileID: 0}
     - target: {fileID: 5017769859177164444, guid: 86c660809b2822b48af7de70ccafda7a, type: 3}
       propertyPath: m_LocalPosition.x
@@ -356,29 +348,7 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5017769859177164444, guid: 86c660809b2822b48af7de70ccafda7a, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5017769859177164444, guid: 86c660809b2822b48af7de70ccafda7a, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5017769859177164444, guid: 86c660809b2822b48af7de70ccafda7a, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5017769859177164445, guid: 86c660809b2822b48af7de70ccafda7a, type: 3}
-      propertyPath: m_Mesh
-      value: 
-      objectReference: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
-    - target: {fileID: 5017769859177164446, guid: 86c660809b2822b48af7de70ccafda7a, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 59d7f03bf1719e641bf27e05d34ffe31, type: 2}
-    m_RemovedComponents:
-    - {fileID: 93485169, guid: 86c660809b2822b48af7de70ccafda7a, type: 3}
-    - {fileID: 5017769859177164419, guid: 86c660809b2822b48af7de70ccafda7a, type: 3}
+    m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 86c660809b2822b48af7de70ccafda7a, type: 3}
 --- !u!1 &170308863
 GameObject:
@@ -582,7 +552,7 @@ Canvas:
   serializedVersion: 3
   m_RenderMode: 1
   m_Camera: {fileID: 963194227}
-  m_PlaneDistance: 100
+  m_PlaneDistance: 7
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
   m_OverrideSorting: 0
@@ -677,7 +647,7 @@ WindZone:
   m_Enabled: 1
   m_Mode: 1
   m_Radius: 20
-  m_WindMain: -200
+  m_WindMain: -100
   m_WindTurbulence: 1
   m_WindPulseMagnitude: 0.5
   m_WindPulseFrequency: 0.01
@@ -689,7 +659,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 538910735}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -63, y: 21.9, z: 52.8}
+  m_LocalPosition: {x: 10, y: 0, z: 40}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 988780114}
@@ -6499,7 +6469,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0, g: 0.33300018, b: 1, a: 1}
+  m_Color: {r: 0, g: 0.3333335, b: 1, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

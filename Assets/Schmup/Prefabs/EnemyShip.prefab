@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2145472593988953419}
   m_Layer: 0
   m_Name: EnemyShip
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -30,7 +30,7 @@ Transform:
   m_GameObject: {fileID: 5017769859177164441}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children:
   - {fileID: 822926267711684166}
   m_Father: {fileID: 0}
@@ -43,7 +43,7 @@ MeshFilter:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5017769859177164441}
-  m_Mesh: {fileID: 10208, guid: 0000000000000000e000000000000000, type: 0}
+  m_Mesh: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!23 &5017769859177164446
 MeshRenderer:
   m_ObjectHideFlags: 0
@@ -134,6 +134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19b386082d3f863439758af09230dcc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  ExplodingParticle: {fileID: 2266719238102416697, guid: 26410fcaec089664e8f47c54c6b86101, type: 3}
 --- !u!1 &5209411998772061431
 GameObject:
   m_ObjectHideFlags: 0

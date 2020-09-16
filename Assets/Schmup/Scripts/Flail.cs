@@ -10,13 +10,14 @@ namespace Schmup
         [Header("Blur")] 
         [SerializeField] private float BlurSpinMaxVelocity = -180.0f;
         [SerializeField] private float AlphaFadeSpeed = 1.0f;
+        [SerializeField] private float BlurColliderThreshold = 0.5f;
         
         private bool LastAttackInput = false;
         private Rigidbody2D FlailHead = null;
 
         private Transform AttachmentPoint = null;
-        private Transform OwnTransform;
-
+        private CircleCollider2D BlurCollider = null;
+        
         private SpriteRenderer SpinBlur = null;
 
         private MeshRenderer[] Meshes;
@@ -25,7 +26,7 @@ namespace Schmup
         {
             Meshes = GetComponentsInChildren<MeshRenderer>();
             SpinBlur = GetComponentInChildren<SpriteRenderer>();
-            OwnTransform = transform;
+            BlurCollider = SpinBlur.gameObject.GetComponent<CircleCollider2D>();
             FlailHead = GetComponentInChildren<Rigidbody2D>();
         }
 
@@ -79,6 +80,8 @@ namespace Schmup
             float targetAlpha = pFadeIn ? 1 : 0;
         
             newColor.a = Mathf.SmoothStep(newColor.a, targetAlpha, AlphaFadeSpeed * Time.fixedDeltaTime);
+            BlurCollider.enabled = newColor.a > BlurColliderThreshold; //Enable circle collider above 0.5 alpha
+            
             SpinBlur.color = newColor;
         }
 
