@@ -6,7 +6,7 @@ namespace Schmup
 {
     public class EnemyCollision : MonoBehaviour
     {
-        [SerializeField] private GameObject ExplodingParticle = null; //TODO: MAKE NOT TERRIBLE
+        [SerializeField] private GameObject ExplodingParticle = null; //TODO: Objectpool
         
         private void OnCollisionEnter2D(Collision2D pOther)
         {
@@ -20,7 +20,7 @@ namespace Schmup
         private void Die()
         {
             Instantiate(ExplodingParticle, transform.position, quaternion.identity);
-            Destroy(gameObject);
+            Destroy(gameObject); //TODO: return to objectpool
         }
 
         private void OnTriggerEnter2D(Collider2D pOther)

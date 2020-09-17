@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6622506601664022008}
   - component: {fileID: 4197317657674882934}
   - component: {fileID: 2145472593988953419}
+  - component: {fileID: 6137674315672865371}
   m_Layer: 0
   m_Name: EnemyShip
   m_TagString: Enemy
@@ -98,8 +99,8 @@ Rigidbody2D:
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
-  m_LinearDrag: 3
-  m_AngularDrag: 0.05
+  m_LinearDrag: 0
+  m_AngularDrag: 0
   m_GravityScale: 0
   m_Material: {fileID: 0}
   m_Interpolate: 0
@@ -135,6 +136,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ExplodingParticle: {fileID: 2266719238102416697, guid: 26410fcaec089664e8f47c54c6b86101, type: 3}
+--- !u!114 &6137674315672865371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5017769859177164441}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 833e608ac5b19c440ac8727a9971a336, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  StartThrust: {x: 0, y: 0}
 --- !u!1 &5209411998772061431
 GameObject:
   m_ObjectHideFlags: 0

@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class ExplodingMesh : MonoBehaviour
 {
@@ -8,11 +7,16 @@ public class ExplodingMesh : MonoBehaviour
     private void Awake()
     {
         Parts = GetComponentsInChildren<Rigidbody>();
+        SetRandomZRotation();
     }
 
+    private void SetRandomZRotation()
+    {
+        transform.Rotate(Vector3.forward, Random.Range(0, 360));
+    }
+    
     private void OnEnable()
     {
-        
         foreach (Rigidbody r in Parts)
         {
             r.AddExplosionForce(ExplosionForce, transform.position, 1);
