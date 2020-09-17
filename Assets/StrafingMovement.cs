@@ -16,6 +16,10 @@ namespace Schmup
         private void Awake()
         {
             Rigidbody = GetComponent<Rigidbody2D>();
+        }
+
+        private void Start()
+        {
             Rigidbody.velocity = StartVelocity;
         }
 

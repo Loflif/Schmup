@@ -17,8 +17,9 @@ namespace Schmup
 
         private bool IsActive = true;
 
-        private Transform OwnTransform;
-        private Transform Child;
+        private Transform OwnTransform = null;
+        private Collider2D Collider = null;
+        private Transform Child = null;
 
         public float Juice
         {
@@ -36,6 +37,7 @@ namespace Schmup
         private void Awake()
         {
             OwnTransform = transform;
+            Collider = GetComponent<Collider2D>();
             Child = OwnTransform.GetChild(0);
             Juice = 1.0f;
             
@@ -51,11 +53,13 @@ namespace Schmup
             if (pActivate && Juice > MinimumToggleThreshold)
             {
                 IsActive = true;
+                Collider.enabled = true;
                 Child.gameObject.SetActive(true);
             }
             else if (!pActivate)
             {
                 IsActive = false;
+                Collider.enabled = false;
                 Child.gameObject.SetActive(false);
             }
         }
