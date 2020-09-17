@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6015087248842863417}
   m_Layer: 0
-  m_Name: EnemyShipFormation
+  m_Name: StrafeFromTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -93,7 +93,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6137674315672865371, guid: 86c660809b2822b48af7de70ccafda7a, type: 3}
       propertyPath: StartVelocity.x
-      value: -4
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 6137674315672865371, guid: 86c660809b2822b48af7de70ccafda7a, type: 3}
       propertyPath: ConstantVelocityChange.y
@@ -163,7 +163,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6137674315672865371, guid: 86c660809b2822b48af7de70ccafda7a, type: 3}
       propertyPath: StartVelocity.x
-      value: -4
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 6137674315672865371, guid: 86c660809b2822b48af7de70ccafda7a, type: 3}
       propertyPath: ConstantVelocityChange.y
@@ -233,7 +233,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6137674315672865371, guid: 86c660809b2822b48af7de70ccafda7a, type: 3}
       propertyPath: StartVelocity.x
-      value: -4
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 6137674315672865371, guid: 86c660809b2822b48af7de70ccafda7a, type: 3}
       propertyPath: ConstantVelocityChange.y
@@ -303,7 +303,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6137674315672865371, guid: 86c660809b2822b48af7de70ccafda7a, type: 3}
       propertyPath: StartVelocity.x
-      value: -4
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 6137674315672865371, guid: 86c660809b2822b48af7de70ccafda7a, type: 3}
       propertyPath: ConstantVelocityChange.y
@@ -373,7 +373,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6137674315672865371, guid: 86c660809b2822b48af7de70ccafda7a, type: 3}
       propertyPath: StartVelocity.x
-      value: -4
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 6137674315672865371, guid: 86c660809b2822b48af7de70ccafda7a, type: 3}
       propertyPath: ConstantVelocityChange.y
@@ -443,7 +443,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6137674315672865371, guid: 86c660809b2822b48af7de70ccafda7a, type: 3}
       propertyPath: StartVelocity.x
-      value: -4
+      value: -6
       objectReference: {fileID: 0}
     - target: {fileID: 6137674315672865371, guid: 86c660809b2822b48af7de70ccafda7a, type: 3}
       propertyPath: ConstantVelocityChange.y

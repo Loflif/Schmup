@@ -1,5 +1,4 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -13,6 +12,7 @@ namespace Schmup
         {
             public GameObject SpawnObject;
             public float SpawnInterval;
+            public float SpawnIntervalOffset;
             public Transform SpawnPosition;
         }
         
@@ -46,6 +46,7 @@ namespace Schmup
             {
                 float nextTimeInterval = s.SpawnInterval;
 
+                nextTimeInterval += s.SpawnIntervalOffset;
                 nextTimeInterval -= simulatedTimeSinceStart;
                 simulatedTimeline.Add(nextTimeInterval);
                 simulatedTimeSinceStart += nextTimeInterval;
@@ -58,11 +59,6 @@ namespace Schmup
         private void SpawnObject(GameObject pObjectToSpawn, Vector3 pSpawnPosition)
         {
             Instantiate(pObjectToSpawn, pSpawnPosition, Quaternion.identity); //TODO: objectpool this shit :)
-        }
-
-        private void Update()
-        {
-            
         }
     }
 }

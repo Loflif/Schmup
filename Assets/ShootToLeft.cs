@@ -3,7 +3,7 @@
 public class ShootToLeft : MonoBehaviour
 {
     [SerializeField] private float ShotDistance = 5.0f;
-    [SerializeField] private LayerMask TargetTable;
+    [SerializeField] private LayerMask TargetTable = new LayerMask();
 
     private ParticleSystem Weapon = null;    
     private Transform OwnTransform;
