@@ -7,6 +7,7 @@ namespace Schmup
     public class GameManager : MonoBehaviour
     {
         private RectTransform ShieldFillRect = null;
+        private RectTransform HealthFillRect = null;
         private Image ShieldFillImage = null;
 
         public static GameManager Instance
@@ -30,6 +31,8 @@ namespace Schmup
             GameObject shieldFill = GameObject.Find("ShieldFill");
             ShieldFillRect = shieldFill.GetComponent<RectTransform>();
             ShieldFillImage = shieldFill.GetComponent<Image>();
+            
+            HealthFillRect = GameObject.Find("HealthFill").GetComponent<RectTransform>();
         }
 
         public void SetShieldJuice(float pValue)
@@ -39,10 +42,16 @@ namespace Schmup
             ShieldFillRect.localScale = shieldFillScale;
         }
 
+        public void SetHealthMeter(float pValue)
+        {
+            Vector3 healthFillScale = HealthFillRect.localScale;
+            healthFillScale.x = pValue;
+            HealthFillRect.localScale = healthFillScale;
+        }
+
         public void SetShieldMeterColor(Color pColor)
         {
             ShieldFillImage.color = pColor;
         }
-        
     }   
 }

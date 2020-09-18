@@ -30,6 +30,11 @@ namespace Schmup
             FlailHead = GetComponentInChildren<Rigidbody2D>();
         }
 
+        private void Start()
+        {
+            BlurCollider.enabled = false;
+        }
+
         public void SetAttackInput(bool pIsAttackWanted)
         {
             LastAttackInput = pIsAttackWanted;

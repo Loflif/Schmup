@@ -12,6 +12,9 @@ namespace Schmup
         [SerializeField] private float MinimumToggleThreshold = 0.2f;
         [Tooltip("Color of Meter based on level")]
         [SerializeField] private Gradient MeterLevelColor = null;
+
+        [SerializeField] private float ParticleCollisionDamage = 0.1f;
+        [SerializeField] private float EnemyCollisionDamage = 0.1f;
         
         private float juice;
 
@@ -97,6 +100,23 @@ namespace Schmup
             }
 
             UpdateMeterColor();
+        }
+
+        private void OnParticleCollision(GameObject pOther)
+        {
+            TakeDamage(ParticleCollisionDamage);
+        }
+
+        private void OnCollisionEnter2D(Collision2D pOther)
+        {
+            TakeDamage(EnemyCollisionDamage);
+        }
+
+        private void TakeDamage(float pDamageTaken)
+        {
+            Juice -= pDamageTaken;
+            if (Juice <= 0)
+                Toggle(false);
         }
 
         private void UpdateMeterColor()

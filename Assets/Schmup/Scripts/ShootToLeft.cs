@@ -36,7 +36,7 @@ public class ShootToLeft : MonoBehaviour
 
     private void Shoot()
     {
-        if (Weapon.isPlaying)
+        if (Weapon.isEmitting)
             return;
         Weapon.Play();
     }

@@ -28,7 +28,6 @@ namespace Schmup
             Weapons.Add(startWeapon);
             CurrentWeaponIterator = Weapons.IndexOf(startWeapon);
 
-            // CameraBounds.min = 
         }
 
         private void Start()

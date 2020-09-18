@@ -5033,12 +5033,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e81c257db7e39b54d83003bc4685cfc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Bullet: {fileID: 0}
-  ShotDistance: 5
+  ShotDistance: 10
   TargetTable:
     serializedVersion: 2
     m_Bits: 1024
-  GunMuzzle: {fileID: 0}
 --- !u!1 &5209411998772061431
 GameObject:
   m_ObjectHideFlags: 0
