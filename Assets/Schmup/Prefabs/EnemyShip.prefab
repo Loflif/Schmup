@@ -4886,7 +4886,7 @@ GameObject:
   - component: {fileID: 2145472593988953419}
   - component: {fileID: 6137674315672865371}
   - component: {fileID: -1889161166456674735}
-  m_Layer: 0
+  m_Layer: 15
   m_Name: EnemyShip
   m_TagString: Enemy
   m_Icon: {fileID: 0}
@@ -8826,7 +8826,7 @@ ParticleSystem:
     colliderForce: 0
     multiplyColliderForceByParticleSize: 0
     multiplyColliderForceByParticleSpeed: 0
-    multiplyColliderForceByCollisionAngle: 1
+    multiplyColliderForceByCollisionAngle: 0
     plane0: {fileID: 0}
     plane1: {fileID: 0}
     plane2: {fileID: 0}
@@ -8997,7 +8997,7 @@ ParticleSystem:
     radiusScale: 1
     collidesWith:
       serializedVersion: 2
-      m_Bits: 1024
+      m_Bits: 9216
     maxCollisionShapes: 256
     quality: 0
     voxelSize: 0.5

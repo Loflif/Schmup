@@ -17,6 +17,12 @@ namespace Schmup
         {
             TakeDamage();
         }
+        
+        private void OnCollisionEnter2D(Collision2D pOther)
+        {
+            if(pOther.transform.CompareTag("Enemy"))
+                TakeDamage();
+        }
 
         private void TakeDamage()
         {

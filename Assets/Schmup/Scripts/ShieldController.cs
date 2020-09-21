@@ -1,11 +1,10 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Schmup
 {
     public class ShieldController : MonoBehaviour
     {
-        [Tooltip("Fraction of shield drain per second")]
-        [SerializeField] private float Drain = 0.5f;
         [Tooltip("Fraction of shield regained per second while not using")]
         [SerializeField] private float Recovery = 0.5f;
         [Tooltip("Amount of shield juice required to toggle the shield on 1st ColorKey is set at MinimumToggleThreshold")]
@@ -34,6 +33,7 @@ namespace Schmup
             {
                 GameManager.Instance.SetShieldJuice(value);
                 juice = value;
+                UpdateMeterColor();
             }
         }
 
@@ -74,40 +74,26 @@ namespace Schmup
 
         private void Update()
         {
-            UpdateJuice();
+            if (!IsActive)
+                RechargeJuice();
         }
 
-        private void UpdateJuice()
+        private void RechargeJuice()
         {
-            if (IsActive
-                && Juice > 0.0f)
-            {
-                Juice -= Drain * Time.deltaTime;
-            }
-            else if(Juice < 1.0f)
-            {
-                Juice += Recovery * Time.deltaTime;
-            }
-            
-            if (Juice <= 0.0f)
-            {
-                Toggle(false);
-                Juice = 0.0f;
-            }
-            else if (Juice > 1.0f)
+            if (Juice >= 1.0f)
             {
                 Juice = 1.0f;
+                return;
             }
-
-            UpdateMeterColor();
+            Juice += Recovery * Time.deltaTime;
         }
 
-        private void OnParticleCollision(GameObject pOther)
+        private void OnCollisionEnter2D(Collision2D pOther)
         {
             TakeDamage(ParticleCollisionDamage);
         }
 
-        private void OnCollisionEnter2D(Collision2D pOther)
+        private void OnTriggerEnter2D(Collider2D pOther)
         {
             TakeDamage(EnemyCollisionDamage);
         }
@@ -126,4 +112,3 @@ namespace Schmup
         }
     }
 }
-
