@@ -22,11 +22,6 @@ namespace Schmup
             CameraOffset = transform.position.z - MainCamera.transform.position.z;
         }
 
-        private void SetShip(IShip pNewShip)
-        {
-            CurrentShip = pNewShip;
-        }
-
         private void BindInput()
         {
             Input.Player.Move.performed += context => SendMovementVector(context.ReadValue<Vector2>());
@@ -38,6 +33,11 @@ namespace Schmup
 
             Input.Player.Shield.performed += context => SendShieldInput(true);
             Input.Player.Shield.canceled += context => SendShieldInput(false);
+
+            Input.Player.SwitchWeapon.performed += context => SwitchWeapon(context.ReadValue<float>());
+
+            Input.Player.Pause.performed += context => GameManager.Instance.TogglePause();
+            
         }
 
         private void SendMovementVector(Vector2 pMovementInput)
@@ -48,6 +48,14 @@ namespace Schmup
         private void SendAttackInput(bool pIsAttackWanted)
         {
             CurrentShip.SetAttackInput(pIsAttackWanted);
+        }
+
+        private void SwitchWeapon(float pScrollValue)
+        {
+            if (pScrollValue > 0)
+                CurrentShip.NextWeapon();
+            else
+                CurrentShip.PreviousWeapon();
         }
 
         private void SendMousePosition(Vector2 pMousePosition)

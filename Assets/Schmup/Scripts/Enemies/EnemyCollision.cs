@@ -1,5 +1,4 @@
-﻿using System;
-using Unity.Mathematics;
+﻿using Unity.Mathematics;
 using UnityEngine;
 
 namespace Schmup
@@ -29,6 +28,11 @@ namespace Schmup
             {
                 Die();
             }
+        }
+
+        private void OnParticleCollision(GameObject other)
+        {
+            Die();
         }
     }   
 }

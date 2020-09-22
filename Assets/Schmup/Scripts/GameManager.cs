@@ -9,7 +9,12 @@ namespace Schmup
         private RectTransform ShieldFillRect = null;
         private RectTransform HealthFillRect = null;
         private Image ShieldFillImage = null;
+        private GameObject PauseScreen = null;
 
+        private bool IsPaused = false;
+
+        public Transform PlayerTransform = null;
+        
         public static GameManager Instance
         {
             get;
@@ -33,6 +38,15 @@ namespace Schmup
             ShieldFillImage = shieldFill.GetComponent<Image>();
             
             HealthFillRect = GameObject.Find("HealthFill").GetComponent<RectTransform>();
+
+            PauseScreen = GameObject.Find("PauseScreen");
+
+            PlayerTransform = GameObject.Find("PlayerShip").transform;
+        }
+
+        private void Start()
+        {
+            TogglePause();
         }
 
         public void SetShieldJuice(float pValue)
@@ -52,6 +66,22 @@ namespace Schmup
         public void SetShieldMeterColor(Color pColor)
         {
             ShieldFillImage.color = pColor;
+        }
+
+        public void TogglePause()
+        {
+            if (!IsPaused)
+            {
+                PauseScreen.SetActive(true);
+                IsPaused = true;
+                Time.timeScale = 0;
+            }
+            else
+            {
+                PauseScreen.SetActive(false);
+                IsPaused = false;
+                Time.timeScale = 1;
+            }
         }
     }   
 }

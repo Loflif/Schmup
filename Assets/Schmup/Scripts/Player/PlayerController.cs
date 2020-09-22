@@ -9,30 +9,53 @@ namespace Schmup
         [SerializeField] private float MovementForce = 1000.0f;
 
         private List<IWeapon> Weapons = new List<IWeapon>();
-        private int CurrentWeaponIterator = 0;
+
+        private int currentWeaponIterator = 0;
+        private int CurrentWeaponIterator
+        {
+            get { return currentWeaponIterator; }
+            set
+            {
+                if (value >= Weapons.Count)
+                {
+                    currentWeaponIterator = 0;
+                }
+                else if (value < 0)
+                {
+                    currentWeaponIterator = Weapons.Count - 1;
+                }
+                else
+                {
+                    currentWeaponIterator = value;
+                }
+            }
+        }
+
         private IWeapon CurrentWeapon;
 
         private Vector2 LastMovementInput = Vector2.zero;
         private Rigidbody2D Rigidbody = null;
         private ShieldController Shield = null;        
         private Transform OwnTransform = null;
-
+        private Transform WeaponParent = null;
         private Bounds CameraBounds;
 
         private void Awake()
         {
             OwnTransform = transform;
+            WeaponParent = OwnTransform.Find("Weapons");
             Shield = GetComponentInChildren<ShieldController>();
             Rigidbody = GetComponent<Rigidbody2D>();
+            
             IWeapon startWeapon = GetComponentInChildren<IWeapon>();
             Weapons.Add(startWeapon);
             CurrentWeaponIterator = Weapons.IndexOf(startWeapon);
-
+            CurrentWeapon = startWeapon;
         }
 
         private void Start()
         {
-            Weapons[CurrentWeaponIterator].Attach(OwnTransform);
+            CurrentWeapon.Attach(WeaponParent);
         }
 
         public void UpdateMovementVector(Vector2 pMovementDirection)
@@ -45,11 +68,28 @@ namespace Schmup
             Vector2 aimDirection = pWorldSpaceMousePosition - (Vector2) OwnTransform.position;
             aimDirection.Normalize();
             Shield.Aim(aimDirection);
+            CurrentWeapon.Aim(aimDirection);
         }
 
         public void SetAttackInput(bool pIsAttackWanted)
         {
-            Weapons[CurrentWeaponIterator].SetAttackInput(pIsAttackWanted);
+            CurrentWeapon.SetAttackInput(pIsAttackWanted);
+        }
+
+        public void NextWeapon()
+        {
+            CurrentWeapon.Toggle(false);
+            CurrentWeaponIterator++;
+            CurrentWeapon = Weapons[CurrentWeaponIterator];
+            CurrentWeapon.Toggle(true);
+        }
+
+        public void PreviousWeapon()
+        {
+            CurrentWeapon.Toggle(false);
+            CurrentWeaponIterator--;
+            CurrentWeapon = Weapons[CurrentWeaponIterator];
+            CurrentWeapon.Toggle(true);
         }
 
         private void FixedUpdate()
@@ -62,10 +102,16 @@ namespace Schmup
             Shield.Toggle(pActivate);
         }
 
+        public void PickupWeapon(IWeapon pPickup)
+        {
+            pPickup.Attach(WeaponParent);
+            Weapons.Add(pPickup);
+            NextWeapon();
+        }
+
         private void Move()
         {
             Rigidbody.AddForce((MovementForce * Time.fixedDeltaTime) * LastMovementInput);
-            
         }
     }   
 }

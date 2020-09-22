@@ -9,5 +9,7 @@ namespace Schmup
         void UpdateAimVector(Vector2 pWorldSpaceMousePosition);
         void SetAttackInput(bool pIsAttackWanted);
         void ToggleShield(bool pActivate);
+        void NextWeapon();
+        void PreviousWeapon();
     }  
 }

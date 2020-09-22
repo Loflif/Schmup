@@ -2,11 +2,11 @@
 
 namespace Schmup
 {
-    public class DisableBoundary3D : MonoBehaviour
+    public class DestructionBoundary : MonoBehaviour
     {
         private void OnTriggerExit(Collider pOther)
         {
-            pOther.gameObject.SetActive(false);
+            Destroy(pOther.gameObject);
         }
     }   
 }

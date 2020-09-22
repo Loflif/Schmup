@@ -116,6 +116,16 @@ namespace Schmup
         {
             SpinBlur.transform.Rotate(Vector3.forward, BlurSpinMaxVelocity * Time.fixedDeltaTime * GetVelocityPercent());
         }
+
+        public void Aim(Vector2 pAimDireciton)
+        {
+            
+        }
+
+        public void Toggle(bool pActive)
+        {
+            gameObject.SetActive(pActive);
+        }
     }
 }
 

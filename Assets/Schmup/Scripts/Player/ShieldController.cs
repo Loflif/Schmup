@@ -90,12 +90,12 @@ namespace Schmup
 
         private void OnCollisionEnter2D(Collision2D pOther)
         {
-            TakeDamage(ParticleCollisionDamage);
+            TakeDamage(EnemyCollisionDamage);
         }
 
-        private void OnTriggerEnter2D(Collider2D pOther)
+        private void OnParticleCollision(GameObject pOther)
         {
-            TakeDamage(EnemyCollisionDamage);
+            TakeDamage(ParticleCollisionDamage);
         }
 
         private void TakeDamage(float pDamageTaken)
