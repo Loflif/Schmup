@@ -5,12 +5,17 @@ namespace Schmup
     public class PlayerCollision : MonoBehaviour
     {
         [SerializeField] private float MaxHealth = 20.0f;
+        [SerializeField] private float LoseScreenDelay = 1.5f;
         private float CurrentHealth = 0.0f;
         private PlayerController PlayerController = null;
+        private ParticleSystem DeathExplosion = null;
+        
 
         private void Awake()
         {
             PlayerController = GetComponentInParent<PlayerController>();
+            DeathExplosion = GetComponentInChildren<ParticleSystem>();
+            DeathExplosion.gameObject.SetActive(false);
             CurrentHealth = MaxHealth;
         }
 
@@ -49,8 +54,10 @@ namespace Schmup
 
         private void Die()
         {
-            //Explode
-            //Disable stuffs
+            DeathExplosion.gameObject.SetActive(true);
+            
+            PlayerController.DisableAssets();
+            PlayerController.enabled = false;
         }
     }
 }

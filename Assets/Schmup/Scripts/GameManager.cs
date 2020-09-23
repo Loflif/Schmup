@@ -1,19 +1,27 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 namespace Schmup
 {
     [DefaultExecutionOrder(-100)]
     public class GameManager : MonoBehaviour
     {
+
+        [SerializeField] private float LoseScreenDelay = 2.0f;
         private RectTransform ShieldFillRect = null;
         private RectTransform HealthFillRect = null;
         private Image ShieldFillImage = null;
         private GameObject PauseScreen = null;
+        private GameObject LoseScreen = null;
 
         private bool IsPaused = false;
 
-        public Transform PlayerTransform = null;
+        public Transform PlayerTransform
+        {
+            get;
+            private set;
+        }
         
         public static GameManager Instance
         {
@@ -32,15 +40,14 @@ namespace Schmup
             {
                 Instance = this;
             }
-            
+
             GameObject shieldFill = GameObject.Find("ShieldFill");
             ShieldFillRect = shieldFill.GetComponent<RectTransform>();
             ShieldFillImage = shieldFill.GetComponent<Image>();
-            
             HealthFillRect = GameObject.Find("HealthFill").GetComponent<RectTransform>();
-
             PauseScreen = GameObject.Find("PauseScreen");
-
+            LoseScreen = GameObject.Find("LoseScreen");
+            LoseScreen.SetActive(false);
             PlayerTransform = GameObject.Find("PlayerShip").transform;
         }
 
@@ -82,6 +89,22 @@ namespace Schmup
                 IsPaused = false;
                 Time.timeScale = 1;
             }
+        }
+
+        public void DelayedLoseScreenActivation()
+        {
+            Invoke("ActivateLoseSceen", LoseScreenDelay);
+        }
+
+        private void ActivateLoseSceen()
+        {
+            LoseScreen.SetActive(true);
+        }
+
+        public void ResetGame()
+        {
+            int sceneIndex = SceneManager.GetActiveScene().buildIndex;
+            SceneManager.LoadScene(sceneIndex);
         }
     }   
 }

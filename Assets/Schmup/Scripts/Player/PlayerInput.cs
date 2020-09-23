@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Schmup
 {
@@ -16,7 +18,6 @@ namespace Schmup
             Input.Enable();
             
             CurrentShip = GetComponent<IShip>();
-            BindInput();
 
             MainCamera = Camera.main;
             CameraOffset = transform.position.z - MainCamera.transform.position.z;
@@ -24,49 +25,92 @@ namespace Schmup
 
         private void BindInput()
         {
-            Input.Player.Move.performed += context => SendMovementVector(context.ReadValue<Vector2>());
+            Input.Player.Move.performed += SendMovementVector;
             
-            Input.Player.Attack.performed += context => SendAttackInput(true);
-            Input.Player.Attack.canceled += context => SendAttackInput(false);
+            Input.Player.Attack.performed += SendAttackInput;
+            Input.Player.Attack.canceled += SendAttackInput;
             
-            Input.Player.Look.performed += context => SendMousePosition(context.ReadValue<Vector2>());
+            Input.Player.Look.performed += SendMousePosition;
 
-            Input.Player.Shield.performed += context => SendShieldInput(true);
-            Input.Player.Shield.canceled += context => SendShieldInput(false);
+            Input.Player.Shield.performed += SendShieldInput;
+            Input.Player.Shield.canceled += SendShieldInput;
 
-            Input.Player.SwitchWeapon.performed += context => SwitchWeapon(context.ReadValue<float>());
+            Input.Player.SwitchWeapon.performed += SwitchWeapon;
 
-            Input.Player.Pause.performed += context => GameManager.Instance.TogglePause();
-            
+            Input.Player.Pause.performed += SendPauseInput;
+
+            Input.Player.Reset.canceled += SendResetInput;
         }
 
-        private void SendMovementVector(Vector2 pMovementInput)
+        private void UnbindInput()
         {
-            CurrentShip.UpdateMovementVector(pMovementInput);
+            Input.Player.Move.performed -= SendMovementVector;
+            
+            Input.Player.Attack.performed -= SendAttackInput;
+            Input.Player.Attack.canceled -= SendAttackInput;
+            
+            Input.Player.Look.performed -= SendMousePosition;
+
+            Input.Player.Shield.performed -= SendShieldInput;
+            Input.Player.Shield.canceled -= SendShieldInput;
+
+            Input.Player.SwitchWeapon.performed -= SwitchWeapon;
+
+            Input.Player.Pause.performed -= SendPauseInput;
+
+            Input.Player.Reset.canceled -= SendResetInput;
         }
 
-        private void SendAttackInput(bool pIsAttackWanted)
+        private void SendMovementVector(InputAction.CallbackContext pContext)
         {
-            CurrentShip.SetAttackInput(pIsAttackWanted);
+            CurrentShip.UpdateMovementVector(pContext.ReadValue<Vector2>());
         }
 
-        private void SwitchWeapon(float pScrollValue)
+        private void SendAttackInput(InputAction.CallbackContext pContext)
         {
-            if (pScrollValue > 0)
+            CurrentShip.SetAttackInput(pContext.performed);
+        }
+
+        private void SwitchWeapon(InputAction.CallbackContext pContext)
+        {
+            float scrollValue = pContext.ReadValue<float>();
+            if (scrollValue > 0)
                 CurrentShip.NextWeapon();
             else
                 CurrentShip.PreviousWeapon();
         }
 
-        private void SendMousePosition(Vector2 pMousePosition)
+        private void SendMousePosition(InputAction.CallbackContext pContext)
         {
-            Vector3 mousePositionWorld = new Vector3(pMousePosition.x, pMousePosition.y, CameraOffset);
+            Vector2 mousePosition = pContext.ReadValue<Vector2>();
+            
+            Vector3 mousePositionWorld = new Vector3(mousePosition.x, mousePosition.y, CameraOffset);
             CurrentShip.UpdateAimVector(MainCamera.ScreenToWorldPoint(mousePositionWorld));
         }
 
-        private void SendShieldInput(bool pEnable)
+        private void SendShieldInput(InputAction.CallbackContext pContext)
         {
-            CurrentShip.ToggleShield(pEnable);
+            CurrentShip.ToggleShield(pContext.performed);
+        }
+
+        private void SendPauseInput(InputAction.CallbackContext pContext)
+        {
+            GameManager.Instance.TogglePause();
+        }
+
+        private void SendResetInput(InputAction.CallbackContext pContext)
+        {
+            GameManager.Instance.ResetGame();
+        }
+
+        private void OnEnable()
+        {
+            BindInput();
+        }
+
+        private void OnDisable()
+        {
+            UnbindInput();
         }
     }   
 }

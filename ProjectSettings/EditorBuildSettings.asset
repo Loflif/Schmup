@@ -4,6 +4,9 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Schmup/Scenes/Level_One.unity
+    guid: 4789b07dc6c450145b831d28725e5d24
   m_configObjects:
     com.unity.input.settings: {fileID: 11400000, guid: b0a9457abf0577b42b12b961828276ff, type: 2}

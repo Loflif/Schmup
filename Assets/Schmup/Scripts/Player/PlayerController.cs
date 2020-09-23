@@ -38,8 +38,10 @@ namespace Schmup
         private ShieldController Shield = null;        
         private Transform OwnTransform = null;
         private Transform WeaponParent = null;
-        private Bounds CameraBounds;
-
+        private MeshRenderer ShipMesh = null;
+        private Collider2D ShipCollider = null;
+        
+        
         private void Awake()
         {
             OwnTransform = transform;
@@ -51,6 +53,9 @@ namespace Schmup
             Weapons.Add(startWeapon);
             CurrentWeaponIterator = Weapons.IndexOf(startWeapon);
             CurrentWeapon = startWeapon;
+            
+            ShipMesh = GetComponent<MeshRenderer>();
+            ShipCollider = GetComponent<Collider2D>();
         }
 
         private void Start()
@@ -112,6 +117,16 @@ namespace Schmup
         private void Move()
         {
             Rigidbody.AddForce((MovementForce * Time.fixedDeltaTime) * LastMovementInput);
+        }
+
+        public void DisableAssets()
+        {
+            Shield.gameObject.SetActive(false);
+            CurrentWeapon.Toggle(false);
+            ShipCollider.enabled = false;
+            ShipMesh.enabled = false;
+            
+            GameManager.Instance.DelayedLoseScreenActivation();
         }
     }   
 }
